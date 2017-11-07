@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			ul{
+				list-style: none;
+			}
+			li{
+				width: 120px;
+				height: 50px;
+				background: yellowgreen;
+				float:left;
+				margin: 15px;
+			}
+		</style>
+	</head>
+	<body>
+		<ul>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<!--<li></li>-->
+		</ul>
+		<div class="audio">
+			<audio src="MP3/1.mp3"></audio>
+			<audio src="MP3/2.mp3"></audio>
+			<audio src="MP3/3.mp3"></audio>
+			<audio src="MP3/4.mp3"></audio>
+			<audio src="MP3/5.mp3"></audio>
+			<audio src="MP3/6.mp3"></audio>
+			<audio src="MP3/7.mp3"></audio>
+			<!--<audio src="MP3/8.mp3"></audio>-->
+		</div>
+		<button id="btn3">播放录制的音乐</button>
+<script src="js/jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$("#btn3").click(function(){
+			var str  = localStorage.getItem("qp");
+			var arr = JSON.parse(str);
+			console.log(str);
+			var i = 0;
+			var t = setInterval(function(){
+				if (i >= arr.length){
+					clearInterval(t)
+					return;
+				}
+				var a = $("audio").get(arr[i])
+				a.load();
+				a.play();
+				i++;
+			},500)
+		})
+		
+		var arr  = [];
+		$(document).keydown(function(e){
+			var i = e.keyCode - 49;
+			arr.push(i);
+			var s = JSON.stringify(arr);
+			localStorage.setItem("qp",s)
+			var a = $("audio").get(i)
+	
+			a.load();
+			a.play();
+		})
+		
+	</script>
+	</body>
+</html>
